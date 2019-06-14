@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href='style.css' rel='stylesheet' type='text/css'>
+  <title>Bookmark It</title>
+</head>
+<body>
+    <h1>Bookmark It</h1>
+  <div id="background"></div>
+  <div id='container'>
+      <div class="item"><button id='' type='submit' class=''>Add Bookmark</button></div>
+      
+      <div class='add-bookmark-form item'>
+        <form id='js-add-bookmark-form'>
+                <label for="Bookmark Title">Bookmark Title:</label>
+                <input type="text" name="title" id="bookmark-title" value="Bookmark Title" required/></br>
+                <label for="Bookmark URL">Bookmark URL:</label>
+                <input type="url" name="url" id="bookmark-url" value="https://www.google.com" required/></br>
+                <label for="Bookmark Rating">Bookmark Rating (1-5):</label>
+                <input type='number' name="rating" id="bookmark-rating" min="1" max="5"/></br>
+                <label for="Bookmark Description">Bookmark Description:</label>
+                <input type="text" name="desc" id="bookmark-description"/>
+                <button type='submit' id='js-add-bookmark'>Submit</button>
+        </form>
+        <div id="error-message"></div>
+      </div>
+
+      <div class="item filter">
+          <form class="filter">
+          <label for="list-filter">Filter by Minimum Rating</label>
+          <select id="#filter">
+            <option value="1">Show All</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </form>
+      </div>
+
+  <div id='results'>
+      <!-- <div class="bookmark STORE.id item">
+          <ul>
+            <li>STORE.title</li>
+            <li>STORE.rating</li>
+          </ul>
+          <button type='button' id='show-hide'>Show/Hide Details</button>
+          <button type='button' id='delete-item'>Delete Bookmark</button>
+        <ul class="details">
+          <li>STORE.url</li>
+          <li>STORE.desc</li>
+        </ul>
+      </div> -->
+  </div>
+  
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="api.js"></script>
+    <script type="text/javascript" src="store.js"></script>
+    <script type="text/javascript" src="bookmark.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
