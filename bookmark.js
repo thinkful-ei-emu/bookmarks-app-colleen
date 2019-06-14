@@ -6,46 +6,87 @@
 const bookmark = (function(){
 
   function generateItemElement(item) {
-  
+    const viewStatus = item.view ? '' : 'hidden';
     let bookMarkItem = `
-    <div class="bookmark item" data-item-id="${item.id}">
+    <div class="bookmark item" data-item-id="${item.id}" data-item-rating="${item.rating}">
       <ul>
         <li>${item.title}</li>
         <li>${item.rating}</li>
       </ul>
       <button type='button' class='show-hide'>Show/Hide Details</button>
       <button type='button' class='delete-item'>Delete Bookmark</button>
-      <div class="expanded hidden" id=${item.id}>
+      <div class="expanded ${viewStatus}"id=${item.id}>
         <li>${item.url}</li>
         <li>${item.desc}</li>
         </div>
     </div>`;
-
     return bookMarkItem;
   }
 
+  function handleAddForm (){
+    $('#container').on('click', '#js-open-form', function(){
+      console.log($(event.currentTarget));
+      store.toggleAddForm();
+      render();
+    });
+  }
+
   function handleDetailButton() {
-    $('.show-hide').click(function(event) {
-      console.log($(event.currentTarget).siblings('.expanded'));
-      $(event.currentTarget).siblings('.expanded').toggleClass('hidden');
+    $('#results').on('click', function(event) {
+      const id = getItemIdFromElement(event.target);
+      toggleShowDetails();
+      store.setShowDetails(id, true);
+      render();
+;
+      //update store to reflect item clicked needs expanded toggled t/f
+      //call render
+    });
+  }
+
+  function toggleShowDetails(){
+    store.showDetails = !store.showDetails;
+  }
+
+  function handleFilterSelect(){
+    $('.filter').on('change', '#filter', function(){
+      event.preventDefault;
+      const val = $(event.currentTarget).find('#filter').val();
+      store.setRating(val);      
+      render();
     });
   }
   
   function generateBookmarkListItemsString(bookmarks){
     const items = bookmarks.map((item) => generateItemElement(item));
     return items.join('');
-    
   }
 
   function render(){
-    
-    //filterByRating
+    // any html, toggle, hide/show etc ONLY happens here
+
+    //will show add bookmark form if toggleAddForm set to true
+    if (store.formShow){
+      $('.add-bookmark-form').removeClass('hidden');
+      $('#js-open-form').html('Hide Add Bookmark');
+    }
+    //if formShow is false, will hide the form
+    if(!store.formShow){
+      $('.add-bookmark-form').addClass('hidden');
+      $('#js-open-form').html('Add Bookmark');
+    }
+
+    //if showDetails is false, will hide additional details 
+ 
     let items = [...store.items ];
+
     
+    //filter by rating: 
+    if (store.rating > 0) {
+      items = store.items.filter(bookmark => bookmark.rating >= store.rating);
+    }
     const BookMarkListItemsString = generateBookmarkListItemsString(items);
     $('#results').html(BookMarkListItemsString);
-    handleDetailButton();
-   
+    renderErrors();
   }
   
   function renderErrors() {
@@ -61,15 +102,16 @@ const bookmark = (function(){
   function handleErrors(errorMessage) {
     store.showError = true;
     store.errorMessage = errorMessage;
-    renderErrors();
+    render();
   }
 
   function handleCloseErrorButton(){
     $('#error-message').on('click', '#close-error', () => {
       store.showError = false;
-      renderErrors();
+      render();
     });
   }
+
   //extend jQuery library to stringify form data
   $.fn.extend({
     serializeJson: function() {
@@ -86,7 +128,6 @@ const bookmark = (function(){
       let newBookmark = $(event.target).serializeJson();
       api.createBookmark(newBookmark)
         .then(itemJson => {
-          console.log(itemJson);
           store.addItem(itemJson);
           render();
         })
@@ -96,16 +137,14 @@ const bookmark = (function(){
     });
   }
 
-
   function getItemIdFromElement(item) {
     return $(item)
       .closest('.bookmark')
       .data('item-id');
-      
   }
+
   function handleItemDelete () {
-    $('.delete-item').on('click', function (event){
-      console.log('delete clicked');
+    $('#container').on('click', '.delete-item', function (event){
       event.preventDefault();
       const id = getItemIdFromElement(event.currentTarget);
       api.deleteBookmark(id)
@@ -116,19 +155,19 @@ const bookmark = (function(){
         .catch(error => {
           handleErrors(error.message);
         });
-      console.log(store.items);
     });
   }
 
   function bindEventListeners(){
-    //handleDetailButton();
+    handleDetailButton();
     handleNewItemSubmit();
     handleCloseErrorButton();
-    console.log(store.items);
+    handleFilterSelect();
+    handleItemDelete();
+    handleAddForm();
   }
 
   return {
-    handleItemDelete,
     render: render,
     bindEventListeners: bindEventListeners
   };

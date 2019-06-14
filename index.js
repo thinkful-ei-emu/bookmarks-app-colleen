@@ -8,9 +8,9 @@ $(document).ready(function() {
       items.forEach((item)=> {
         console.log(item);
         store.addItem(item);
-        console.log(store.items)
+        console.log(store.items);
       });
       bookmark.render();
-      bookmark.handleItemDelete();
+
     });
 });
