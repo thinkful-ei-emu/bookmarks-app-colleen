@@ -19,11 +19,7 @@ const store =(function(){
     return store.rating = rating;
   };
 
-  const setShowDetails = function(id, showDetails){
-    const item = this.findById(id);
-    item.view = showDetails;
-  };
-
+  
   const toggleAddForm = function() {
     this.formShow = !this.formShow;
   };
@@ -31,8 +27,6 @@ const store =(function(){
   return {
     formShow : false,
     toggleAddForm,
-    setShowDetails,
-    showDetails: false,
     items: [],
     addBookmark: false,
     addItem,

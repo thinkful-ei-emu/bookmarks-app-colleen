@@ -34,18 +34,14 @@ const bookmark = (function(){
   function handleDetailButton() {
     $('#results').on('click', function(event) {
       const id = getItemIdFromElement(event.target);
-      toggleShowDetails();
-      store.setShowDetails(id, true);
+      const bookmark = store.findById(id);
+      bookmark.view = !bookmark.view;
       render();
-;
       //update store to reflect item clicked needs expanded toggled t/f
       //call render
     });
   }
 
-  function toggleShowDetails(){
-    store.showDetails = !store.showDetails;
-  }
 
   function handleFilterSelect(){
     $('.filter').on('change', '#filter', function(){
