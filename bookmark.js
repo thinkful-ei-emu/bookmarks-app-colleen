@@ -140,7 +140,7 @@ const bookmark = (function(){
   }
 
   function handleItemDelete () {
-    $('#container').on('click', '.delete-item', function (event){
+    $('#results').on('click', '.delete-item', function (event){
       event.preventDefault();
       const id = getItemIdFromElement(event.currentTarget);
       api.deleteBookmark(id)
