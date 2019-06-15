@@ -1,46 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width", initial-scale="1">
   <link rel="shortcut icon" href="#">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Roboto&display=swap" rel="stylesheet">
   <link href='style.css' rel='stylesheet' type='text/css'>
   <title>Bookmark It</title>
 </head>
 <body>
-    <h1>Bookmark It</h1>
-  <div id="background"></div>
   <div id='container'>
-      <div class="item"><button id='js-open-form' type='submit' class=''>Add Bookmark</button></div>
-      <div class='add-bookmark-form item hidden'>
-        <form id='js-add-bookmark-form'>
+      <h1>Bookmark It</h1>
+
+    <div id='on-load'>
+        <div class="item-button"><button id='js-open-form' type='submit' class=''>Add Bookmark</button></div>
+        <div class='add-bookmark-form item hidden'>
+        <div class = 'container'>
+          <form id='js-add-bookmark-form'>
+            <ul class ='form-flex'>
+              <li>
                 <label for="bookmark-title">Bookmark Title:</label>
-                <input type="text" name="title" id="bookmark-title" value="Bookmark Title" required/></br>
+                <input type="text" name="title" id="bookmark-title" value="Bookmark Title" required/>
+              </li>
+              <li>
                 <label for="bookmark-url">Bookmark URL:</label>
-                <input type="url" name="url" id="bookmark-url" value="https://www.google.com" required/></br>
-                <label for="bookmark-rating">Bookmark Rating (1-5):</label>
-                <input type='number' name="rating" id="bookmark-rating" min="1" max="5"/></br>
-                <label for="bookmark-description">Bookmark Description:</label>
-                <input type="text" name="desc" id="bookmark-description"/>
-                <button type='submit' id='js-add-bookmark'>Submit</button>
-        </form>
-        <div id="error-message"></div>
-      </div>
+                <input type="url" name="url" id="bookmark-url" value="https://www.google.com" required/>
+              </li>
+              <li>
+                  <label for="bookmark-rating">Bookmark Rating (1-5):</label>
+                  <input type='number' name="rating" id="bookmark-rating" min="1" max="5"/>
+              </li>
+              <li>
+                  <label for="bookmark-description">Bookmark Description:</label>
+                  <input type="text" name="desc" id="bookmark-description"/>
+                </li>
+              <li>
+                  <button type='submit' id='js-add-bookmark'>Submit</button>
+                </li>
+              </ul>
+            </form>
+        </div>
+          <div id="error-message"></div>
+        </div>
 
 
-      <div class="item">
-          <form class="filter">
-          <label for="filter">Filter by Minimum Rating</label>
-          <select id="filter">
-            <option>Show All</option>
-            <option>1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        </form>
+        <div class="item">
+            <form class="filter">
+            <label for="filter">Filter by Minimum Rating</label>
+            <select id="filter">
+              <option>Show All</option>
+              <option>1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </form>
+        </div>
       </div>
+    </div>
 
   <div id='results'>
   </div>

@@ -10,14 +10,13 @@ const bookmark = (function(){
     let bookMarkItem = `
     <div class="bookmark item" data-item-id="${item.id}" data-item-rating="${item.rating}">
       <ul>
-        <li>${item.title}</li>
-        <li>${item.rating}</li>
+        <li class="desc-title"><span>${item.title}</span></li>
+        <li><span class="desc-rating">Rating:</span> ${item.rating}</li>
       </ul>
-      <button type='button' class='show-hide'>Show/Hide Details</button>
       <button type='button' class='delete-item'>Delete Bookmark</button>
       <div class="expanded ${viewStatus}"id=${item.id}>
-        <li>${item.url}</li>
-        <li>${item.desc}</li>
+        <li class="url"><a href=${item.url}>Visit Site</a></li>
+        <li class="item-desc"><span class="desc-titles">Description:</span> ${item.desc}</li>
         </div>
     </div>`;
     return bookMarkItem;
@@ -89,8 +88,8 @@ const bookmark = (function(){
     let error = '';
     if(store.showError) {
       error = `
-      <p id="error-message">Couldn't add bookmark: ${store.errorMessage}</p>
-      <button type='button' id='close-error'>Close</button>`;
+      <p id="error-message">Couldn't add bookmark: ${store.errorMessage}<button type='button' id='close-error'>Close</button></p>
+      `;
     }
     $('#error-message').html(error);
   }
