@@ -13,8 +13,13 @@ body {
 h1 {
   font-family: "Permanent Marker", cursive;
   text-align: center;
-  font-size: 5.0rem;
+  font-size: 3.0rem;
 }
+
+input {
+  color: rgb(194, 189, 189)
+}
+
 .item {
   flex-grow: 1;
   flex-shrink: 0;

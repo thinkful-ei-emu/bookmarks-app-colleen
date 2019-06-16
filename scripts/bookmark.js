@@ -57,6 +57,8 @@ const bookmark = (function(){
   }
 
   function render(){
+    $('#js-add-bookmark-form')[0].reset();
+
     // any html, toggle, hide/show etc ONLY happens here
 
     //will show add bookmark form if toggleAddForm set to true
@@ -116,7 +118,13 @@ const bookmark = (function(){
       return JSON.stringify(obj);
     }
   });
-	
+
+  function handleTextChange() {
+    $('#js-add-bookmark-form').click(function(){
+      $('input').css('color', 'rgb(0,0,0)');
+    });
+  }
+
   function handleNewItemSubmit() {
     $('#js-add-bookmark-form').submit(function (event) {
       event.preventDefault();
@@ -160,6 +168,7 @@ const bookmark = (function(){
     handleFilterSelect();
     handleItemDelete();
     handleAddForm();
+    handleTextChange();
   }
 
   return {
