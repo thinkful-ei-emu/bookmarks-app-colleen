@@ -24,7 +24,6 @@ const bookmark = (function(){
 
   function handleAddForm (){
     $('#container').on('click', '#js-open-form', function(){
-      console.log($(event.currentTarget));
       store.toggleAddForm();
       render();
     });
@@ -119,13 +118,16 @@ const bookmark = (function(){
     }
   });
 
-  function handleTextChange() {
-    $('#js-add-bookmark-form').click(function(){
-      $('input').css('color', 'rgb(0,0,0)');
+/*   function handleTextChange() {
+    $('#js-add-bookmark-form').click('#js-add-bookmark-form', function(){
+      $(event.currentTarget).css('color', 'rgb(0,0,0)');
     });
-  }
-
+/*     $('#container').select($('#js-add-bookmark-form').css('color', 'rgb(0,0,0)'));
+ */    /* console.log(event.currentTarget);
+  } */
+ 
   function handleNewItemSubmit() {
+    
     $('#js-add-bookmark-form').submit(function (event) {
       event.preventDefault();
       let newBookmark = $(event.target).serializeJson();
@@ -138,6 +140,7 @@ const bookmark = (function(){
           handleErrors(error.message);
         });
     });
+
   }
 
   function getItemIdFromElement(item) {
@@ -168,7 +171,7 @@ const bookmark = (function(){
     handleFilterSelect();
     handleItemDelete();
     handleAddForm();
-    handleTextChange();
+    //handleTextChange();
   }
 
   return {

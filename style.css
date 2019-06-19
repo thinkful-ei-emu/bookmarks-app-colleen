@@ -16,9 +16,7 @@ h1 {
   font-size: 3.0rem;
 }
 
-input {
-  color: rgb(194, 189, 189)
-}
+
 
 .item {
   flex-grow: 1;
@@ -47,6 +45,7 @@ input {
   flex-direction: column;
   align-content: center;
   padding: 5%;
+  max-width: 800px;
 }
 
 #results {
@@ -55,6 +54,7 @@ input {
   flex-wrap: wrap;
   align-content: center;
   padding: 5%;
+  max-width: 800px;
   
 }
 
@@ -70,6 +70,7 @@ input {
   line-height: 1.7rem;
   color: #eeeeee;
   text-transform: uppercase;
+  max-width: 800px;
   
 }
 #close-error {
